@@ -1,8 +1,7 @@
-/* eslint-disable react/no-unescaped-entities */
-import { MaxWidthWrapper } from "@/components/max-width-wrapper"
+import { MaxWidthWrapper } from "@/components/utils/max-width-wrapper"
 import { Check } from "lucide-react"
-import { ShinyButton } from "@/components/shiny-button"
-import { Heading } from "@/components/heading"
+import { ShinyButton } from "@/components/utils/shiny-button"
+import { Heading } from "@/components/utils/heading"
 
 const Page = () => {
 
@@ -45,10 +44,10 @@ const Page = () => {
 
             <div className="w-full max-w-80">
               <ShinyButton
-                href="/sign-up"
+                href="/sign-in"
                 className="relative z-10 h-14 w-full text-base shadow-lg transition-shadow duration-300 hover:shadow-xl"
               >
-                Start For Free Today
+                Go to Dashboard
               </ShinyButton>
             </div>
           </div>

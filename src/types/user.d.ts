@@ -15,3 +15,11 @@ type User = {
   phoneNumber: string;
   role: Role;
 };
+
+type Staff = {
+  code: string;
+  name: string;
+  role: string;
+  status: string;
+  createdAt: string;
+}
