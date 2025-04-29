@@ -11,7 +11,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, Transition } from 
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { Fragment } from 'react'
 
 function classNames(...classes: string[]) {
@@ -26,14 +26,14 @@ const user = {
 }
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard-overview', current: true },
-  { name: 'Items in Production', href: '/production', current: false },
-  { name: 'Product', href: '/product-management', current: false },
-  { name: 'Inventory', href: '/inventory-management', current: false },
-  { name: 'Staffs', href: '/staff-management', current: false },
-  { name: 'Material Request', href: '#', current: false },
-  { name: 'Assign Work', href: '#', current: false },
-  { name: 'Authorize Materials', href: '#', current: false },
+  { name: 'Dashboard', href: '/dashboard-overview', current: false },
+  { name: 'Raw Items', href: '/items-management', current: false },
+  { name: 'Material Request', href: '/material-request', current: false },
+  // { name: 'Items in Production', href: '/production', current: false },
+  // { name: 'Product', href: '/product-management', current: false },
+  { name: 'Users', href: '/user-management', current: false },
+  { name: 'Invoices', href: '/invoice-management', current: false },
+  { name: 'Settings', href: '/settings', current: false },
 ]
 
 const userNavigation = [
@@ -91,6 +91,13 @@ export const Navbar = () => {
 export const DashboardNav = () => {
 
   const router = useRouter();
+  const pathname = usePathname(); // Use usePathname to get the current path
+
+  // Update the `current` property based on the pathname
+  const updatedNavigation = navigation.map(item => ({
+    ...item,
+    current: pathname === item.href, // Set the current flag for active link
+  }));
 
   const handleSignOut = () => {
     clearAccessToken();
@@ -196,8 +203,10 @@ export const DashboardNav = () => {
             </Menu>
           </div>
         </div>
+
+         {/* Desktop Navigation */}
         <nav aria-label="Global" className="hidden lg:flex lg:space-x-8 lg:py-2">
-          {navigation.map((item) => (
+          {updatedNavigation.map((item) => (
             <a
               key={item.name}
               href={item.href}
@@ -215,19 +224,18 @@ export const DashboardNav = () => {
 
       <DisclosurePanel as="nav" aria-label="Global" className="lg:hidden">
         <div className="space-y-1 px-2 pb-3 pt-2">
-          {navigation.map((item) => (
-            <DisclosureButton
+          {updatedNavigation.map((item) => (
+            <a
               key={item.name}
-              as="a"
               href={item.href}
               aria-current={item.current ? 'page' : undefined}
               className={classNames(
                 item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                'block rounded-md px-3 py-2 text-base font-medium',
+                'inline-flex items-center rounded-md px-3 py-2 text-sm font-medium',
               )}
             >
               {item.name}
-            </DisclosureButton>
+            </a>
           ))}
         </div>
         <div className="border-t border-gray-700 pb-3 pt-4">

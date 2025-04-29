@@ -153,7 +153,6 @@ export const parseCurrencyToNumber2 = (value: string): number => {
   return isNaN(parsedNumber) ? 0 : parsedNumber;
 };
 
-
 export const parsePercentageToNumber = (value: string): number => {
   const numberString = value.replace(/[^0-9.]+/g, ''); // Remove everything except digits and decimal points
   const parsedNumber = parseFloat(numberString);
@@ -173,4 +172,9 @@ export const getColorByWalletType = (walletType: string) => {
     default:
       return "#FFF";
   }
+};
+
+export const capitalize = (value: string): string => {
+  if (!value) return value; // Return the original value if it's empty
+  return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
 };

@@ -27,7 +27,7 @@ import { Input } from "../../ui/input"
 import { FiSearch } from "react-icons/fi";
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "../../ui/dropdown-menu"
 import { Button } from "../../ui/button"
-import { DataTablePagination } from "./data-table-pagination"
+import { DataTablePagination2 } from "./data-table-pagination2"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -208,16 +208,15 @@ export function DataTable<TData, TValue>({
 
       {/* PAGINATION */}
       {serverSidePagination ? (
-        <DataTablePagination
+        <DataTablePagination2
           table={table}
           currentPage={pagination?.currentPage}
           totalPages={pagination?.totalPages}
           onPageChange={(page) => onPaginationChange && onPaginationChange(page, pagination?.pageSize || 10)}
           onPageSizeChange={(size) => onPaginationChange && onPaginationChange(pagination?.currentPage || 1, size)}
-          pageSize={pagination?.pageSize || 10}
         />
       ) : (
-        <DataTablePagination table={table} />
+        <DataTablePagination2 table={table} />
       )}
     </>
   )

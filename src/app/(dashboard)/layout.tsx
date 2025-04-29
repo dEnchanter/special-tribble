@@ -10,10 +10,10 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
 
   return (
-    <>
+    <div className="mb-10">
       <DashboardNav />
       {children}
-    </>
+    </div>
   )
 
 }

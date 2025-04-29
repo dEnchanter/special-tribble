@@ -3,8 +3,6 @@
 import React, { useState } from 'react';
 import { DataTableLoader2 } from '../utils/loader';
 import Template from '../utils/template';
-import { useStaff } from '@/hooks/useStaff';
-import { staffColumns } from '@/app/(dashboard)/user-management/columns';
 import { NewPageIcon, PageErrorIcon } from '../utils/icons';
 import { Button } from '../ui/button';
 import { IoMdAdd } from "react-icons/io";
@@ -12,18 +10,20 @@ import { Card, CardContent, CardHeader } from '../ui/card';
 import { Separator } from '../ui/separator';
 import { DataTable } from './utils/data-table';
 import CustomDialog from '../dialog/CustomDialog';
-import StaffForm from '../forms/StaffForm';
+import { useRawItems } from '@/hooks/useRawItems';
+import { rawItemsColumns } from '@/app/(dashboard)/items-management/columns';
+import RawItemsForm from '../forms/RawItemsForm';
 
-const StaffTable = () => {
-  const { data: staff, isLoading, isError, refetch } = useStaff();
+const RawItemsTable = () => {
+  const { data: rawItems, isLoading, isError, refetch } = useRawItems();
 
   const [open, setOpen] = useState(false);
-  const [editStaff, setEditStaff] = useState<Partial<Staff> | undefined>(undefined);
+  const [editRawItems, setEditRawItems] = useState<Partial<RawItems> | undefined>(undefined);
 
   const toggleDialog = () => setOpen(!open);
 
-  const handleEdit = (staff: Staff) => {
-    setEditStaff(staff);
+  const handleEdit = (rawItems: RawItems) => {
+    setEditRawItems(rawItems);
     setOpen(true);
   };
 
@@ -32,7 +32,7 @@ const StaffTable = () => {
       <NewPageIcon />
       <h2 className="text-[#1E2022] text-sm font-medium">Team Work Makes the dream work</h2>
       <Button className="bg-gradient-to-r from-brand-800 to-brand-700 text-white" onClick={toggleDialog}>
-        Create Staff
+        Create Raw Items
       </Button>
     </div>
   );
@@ -40,7 +40,7 @@ const StaffTable = () => {
   const errorComp = (
     <div className="flex flex-col space-y-3 items-center justify-center text-center min-h-[400px]">
       <PageErrorIcon />
-      <h2 className="text-[#1E2022] text-sm font-medium">Failed to load staff data</h2>
+      <h2 className="text-[#1E2022] text-sm font-medium">Failed to load items data</h2>
       <Button className="bg-gradient-to-r from-brand-800 to-brand-700 text-white" onClick={() => refetch()}>
         Retry
       </Button>
@@ -52,10 +52,10 @@ const StaffTable = () => {
       <Card>
         <CardHeader className="">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-lg font-semibold">Manage Staff</h2>
+            <h2 className="text-lg font-semibold">Manage Raw Items</h2>
             <Button className="bg-gradient-to-r from-brand-800 0% to-brand-700 70% text-white" onClick={toggleDialog}>
               <IoMdAdd />
-              Create Staff
+              Create Raw Items
             </Button>
           </div>
           <Separator />
@@ -67,12 +67,12 @@ const StaffTable = () => {
             </div>
           ) : isError ? (
             errorComp
-          ) : (staff ?? []).length === 0 ? (
+          ) : (rawItems ?? []).length === 0 ? (
             emptyMessage // Show empty message if there are no staff data
           ) : (
             <DataTable
-              columns={staffColumns}
-              data={staff || []}
+              columns={rawItemsColumns}
+              data={rawItems || []}
               emptyMessage={emptyMessage}
               onRowClick={handleEdit} // Open the edit dialog when a row is clicked
             />
@@ -80,7 +80,7 @@ const StaffTable = () => {
 
           {/* Custom Dialog for Editing Staff */}
           <CustomDialog open={open} toggleOpen={toggleDialog} dialogWidth="sm:max-w-[700px]">
-            <StaffForm closeDialog={toggleDialog} initialValues={editStaff} />
+            <RawItemsForm closeDialog={toggleDialog} initialValues={editRawItems} />
           </CustomDialog>
         </CardContent>
       </Card>
@@ -88,4 +88,4 @@ const StaffTable = () => {
   );
 };
 
-export default StaffTable;
+export default RawItemsTable;

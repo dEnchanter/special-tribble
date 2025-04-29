@@ -1,10 +1,9 @@
+// components/tables/InvoiceTable.tsx
 "use client"
 
 import React, { useState } from 'react';
 import { DataTableLoader2 } from '../utils/loader';
 import Template from '../utils/template';
-import { useStaff } from '@/hooks/useStaff';
-import { staffColumns } from '@/app/(dashboard)/user-management/columns';
 import { NewPageIcon, PageErrorIcon } from '../utils/icons';
 import { Button } from '../ui/button';
 import { IoMdAdd } from "react-icons/io";
@@ -12,27 +11,29 @@ import { Card, CardContent, CardHeader } from '../ui/card';
 import { Separator } from '../ui/separator';
 import { DataTable } from './utils/data-table';
 import CustomDialog from '../dialog/CustomDialog';
-import StaffForm from '../forms/StaffForm';
+import { invoiceColumns } from '@/app/(dashboard)/invoice-management/columns';
+import { useInvoice } from '@/hooks/useInvoice';
+import InvoiceForm from '../forms/InvoiceForm';
 
-const StaffTable = () => {
-  const { data: staff, isLoading, isError, refetch } = useStaff();
+const InvoiceTable = () => {
+  const { data: invoices, isLoading, isError, refetch } = useInvoice();
 
   const [open, setOpen] = useState(false);
-  const [editStaff, setEditStaff] = useState<Partial<Staff> | undefined>(undefined);
+  const [editInvoice, setEditInvoice] = useState<Partial<Invoice> | undefined>(undefined);
 
   const toggleDialog = () => setOpen(!open);
 
-  const handleEdit = (staff: Staff) => {
-    setEditStaff(staff);
+  const handleEdit = (invoice: Invoice) => {
+    setEditInvoice(invoice);
     setOpen(true);
   };
 
   const emptyMessage = (
     <div className="flex flex-col space-y-3 items-center justify-center text-center min-h-[400px]">
       <NewPageIcon />
-      <h2 className="text-[#1E2022] text-sm font-medium">Team Work Makes the dream work</h2>
+      <h2 className="text-[#1E2022] text-sm font-medium">No invoices found</h2>
       <Button className="bg-gradient-to-r from-brand-800 to-brand-700 text-white" onClick={toggleDialog}>
-        Create Staff
+        Create Invoice
       </Button>
     </div>
   );
@@ -40,7 +41,7 @@ const StaffTable = () => {
   const errorComp = (
     <div className="flex flex-col space-y-3 items-center justify-center text-center min-h-[400px]">
       <PageErrorIcon />
-      <h2 className="text-[#1E2022] text-sm font-medium">Failed to load staff data</h2>
+      <h2 className="text-[#1E2022] text-sm font-medium">Failed to load invoice data</h2>
       <Button className="bg-gradient-to-r from-brand-800 to-brand-700 text-white" onClick={() => refetch()}>
         Retry
       </Button>
@@ -50,37 +51,37 @@ const StaffTable = () => {
   return (
     <Template>
       <Card>
-        <CardHeader className="">
+        <CardHeader>
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-lg font-semibold">Manage Staff</h2>
+            <h2 className="text-lg font-semibold">Manage Invoices</h2>
             <Button className="bg-gradient-to-r from-brand-800 0% to-brand-700 70% text-white" onClick={toggleDialog}>
               <IoMdAdd />
-              Create Staff
+              Create Invoice
             </Button>
           </div>
           <Separator />
         </CardHeader>
-        <CardContent className="">
+        <CardContent>
           {isLoading ? (
             <div className="flex justify-center items-center min-h-[400px]">
-              <DataTableLoader2 /> {/* Show loading spinner */}
+              <DataTableLoader2 />
             </div>
           ) : isError ? (
             errorComp
-          ) : (staff ?? []).length === 0 ? (
-            emptyMessage // Show empty message if there are no staff data
+          ) : (invoices ?? []).length === 0 ? (
+            emptyMessage
           ) : (
             <DataTable
-              columns={staffColumns}
-              data={staff || []}
+              columns={invoiceColumns}
+              data={invoices || []}
               emptyMessage={emptyMessage}
-              onRowClick={handleEdit} // Open the edit dialog when a row is clicked
+              onRowClick={handleEdit}
             />
           )}
 
-          {/* Custom Dialog for Editing Staff */}
+          {/* Custom Dialog for Editing Invoice */}
           <CustomDialog open={open} toggleOpen={toggleDialog} dialogWidth="sm:max-w-[700px]">
-            <StaffForm closeDialog={toggleDialog} initialValues={editStaff} />
+            <InvoiceForm closeDialog={toggleDialog} initialValues={editInvoice} />
           </CustomDialog>
         </CardContent>
       </Card>
@@ -88,4 +89,4 @@ const StaffTable = () => {
   );
 };
 
-export default StaffTable;
+export default InvoiceTable;
