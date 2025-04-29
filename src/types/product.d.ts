@@ -57,7 +57,7 @@ interface ProductDef {
 }
 interface ProductionItem {
   itemName: string;        // Name of the item (string)
-  size: string;            // Size of the item (string)
+  size: number;            // Size of the item (string)
   tailor: string;          // Name of the tailor (string)
   status: string;          // Status of the production (string)
   expectedTime: string;    // Expected completion time (ISO string format)
