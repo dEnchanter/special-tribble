@@ -31,7 +31,7 @@ const InvoiceTable = () => {
   const emptyMessage = (
     <div className="flex flex-col space-y-3 items-center justify-center text-center min-h-[400px]">
       <NewPageIcon />
-      <h2 className="text-[#1E2022] text-sm font-medium">No invoices found</h2>
+      <h2 className='font-medium text-xs'>No invoices found</h2>
       <Button className="bg-gradient-to-r from-brand-800 to-brand-700 text-white" onClick={toggleDialog}>
         Create Invoice
       </Button>
@@ -41,7 +41,7 @@ const InvoiceTable = () => {
   const errorComp = (
     <div className="flex flex-col space-y-3 items-center justify-center text-center min-h-[400px]">
       <PageErrorIcon />
-      <h2 className="text-[#1E2022] text-sm font-medium">Failed to load invoice data</h2>
+      <h2 className='font-medium text-xs'>Failed to load invoice data</h2>
       <Button className="bg-gradient-to-r from-brand-800 to-brand-700 text-white" onClick={() => refetch()}>
         Retry
       </Button>

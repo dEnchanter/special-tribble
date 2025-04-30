@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface Product {
+  id: number;
   assignDate: string;         // The date when the product was assigned (ISO string format)
   code: string;               // A unique code or identifier for the product
   stage: string;              // The current stage of the product (e.g., "In Production", "Completed")
@@ -9,17 +10,16 @@ interface Product {
 }
 
 interface ProductStockStage {
-  id: string;              // Unique identifier for the product stock stage
-  productStockId: string;  // The ID of the related product stock
-  stage: string;           // The name or description of the stage (e.g., "In Stock", "Shipped")
-  status: string;          // The current status of the stage (e.g., "Completed", "Pending", etc.)
-  startDate?: string;      // Optional start date of the stage (ISO string)
-  endDate?: string;        // Optional end date of the stage (ISO string)
-  updatedAt?: string;      // Optional timestamp of when the stage was last updated (ISO string)
-  createdAt: string;       // The timestamp of when the stage was created (ISO string)
+  id: number;              // Unique identifier for the product stock stage
+  stage: string;  
+  stageDate: string;         // The name or description of the stage (e.g., "In Stock", "Shipped")
+  stockId: number;  // The ID of the related product stock
+  invoiceId: number;          // The current status of the stage (e.g., "Completed", "Pending", etc.)
+  staffId: number;      // Optional start date of the stage (ISO string)
 }
 
 interface ProductStock {
+  id: number;
   productionCode: string;           // The unique production code for the product stock
   pushedBy: number;                 // The ID of the user who pushed the product to the stock
   receivedBy: number;               // The ID of the user who received the product into the stock
@@ -29,6 +29,7 @@ interface ProductStock {
 }
 
 interface ProductionStages {
+  id: number;            // Unique identifier for the production stage
   changeDate: string;      // The date when the stage was changed (ISO string format)
   stageName: string;       // The name of the production stage (e.g., "In Progress", "Completed")
   description: string;     // A description of the stage or any relevant details
@@ -37,6 +38,7 @@ interface ProductionStages {
 }
 
 interface ProductInProduction {
+  id: number;               // Unique identifier for the product in production
   dateRequested: string;        // The date when the product was requested (ISO string format)
   requestedBy: number;          // The ID of the person who requested the product for production
   quantity: Record<string, any>; // The quantity of products requested, could be an object depending on the data structure
@@ -46,6 +48,7 @@ interface ProductInProduction {
 }
 
 interface ProductDef {
+  id: number;               // Unique identifier for the product definition
   code: string;               // A unique code for the product definition
   name: string;               // Name of the product
   cost: number;               // The cost associated with the product
@@ -54,11 +57,4 @@ interface ProductDef {
   description: string;        // A detailed description of the product
   genderType: string;         // Gender type associated with the product (e.g., "Male", "Female", "Unisex")
   creatorId: number;          // The ID of the user who created the product definition
-}
-interface ProductionItem {
-  itemName: string;        // Name of the item (string)
-  size: number;            // Size of the item (string)
-  tailor: string;          // Name of the tailor (string)
-  status: string;          // Status of the production (string)
-  expectedTime: string;    // Expected completion time (ISO string format)
 }

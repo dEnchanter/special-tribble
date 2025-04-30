@@ -30,7 +30,7 @@ const MaterialRequestTable = () => {
   const emptyMessage = (
     <div className="flex flex-col space-y-3 items-center justify-center text-center min-h-[400px]">
       <NewPageIcon />
-      <h2 className="text-[#1E2022] text-sm font-medium">No material requests found</h2>
+      <h2 className='font-medium text-xs'>No material requests found</h2>
       <Button className="bg-gradient-to-r from-brand-800 to-brand-700 text-white" onClick={toggleDialog}>
         Create Material Request
       </Button>
@@ -40,7 +40,7 @@ const MaterialRequestTable = () => {
   const errorComp = (
     <div className="flex flex-col space-y-3 items-center justify-center text-center min-h-[400px]">
       <PageErrorIcon />
-      <h2 className="text-[#1E2022] text-sm font-medium">Failed to load material requests</h2>
+      <h2 className='font-medium text-xs'>Failed to load material requests</h2>
       <Button className="bg-gradient-to-r from-brand-800 to-brand-700 text-white" onClick={() => refetch()}>
         Retry
       </Button>

@@ -26,14 +26,13 @@ const user = {
 }
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard-overview', current: false },
+  // { name: 'Dashboard', href: '/dashboard-overview', current: false },
   { name: 'Raw Items', href: '/items-management', current: false },
   { name: 'Material Request', href: '/material-request', current: false },
-  // { name: 'Items in Production', href: '/production', current: false },
-  // { name: 'Product', href: '/product-management', current: false },
+  { name: 'Product', href: '/production-management', current: false },
   { name: 'Users', href: '/user-management', current: false },
   { name: 'Invoices', href: '/invoice-management', current: false },
-  { name: 'Settings', href: '/settings', current: false },
+  { name: 'Configs', href: '/configurations', current: false },
 ]
 
 const userNavigation = [

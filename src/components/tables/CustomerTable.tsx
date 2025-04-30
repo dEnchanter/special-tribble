@@ -31,7 +31,7 @@ const CustomerTable = () => {
   const emptyMessage = (
     <div className="flex flex-col space-y-3 items-center justify-center text-center min-h-[400px]">
       <NewPageIcon />
-      <h2 className="text-[#1E2022] text-sm font-medium">No customers found</h2>
+      <h2 className='font-medium text-xs'>No customers found</h2>
       <Button className="bg-gradient-to-r from-brand-800 to-brand-700 text-white" onClick={toggleDialog}>
         Create Customer
       </Button>
@@ -41,7 +41,7 @@ const CustomerTable = () => {
   const errorComp = (
     <div className="flex flex-col space-y-3 items-center justify-center text-center min-h-[400px]">
       <PageErrorIcon />
-      <h2 className="text-[#1E2022] text-sm font-medium">Failed to load customer data</h2>
+      <h2 className='font-medium text-xs'>Failed to load customer data</h2>
       <Button className="bg-gradient-to-r from-brand-800 to-brand-700 text-white" onClick={() => refetch()}>
         Retry
       </Button>
