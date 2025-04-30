@@ -75,7 +75,7 @@ export default function LoginPage() {
 
         toast.success(loginResponse?.message);
 
-        router.push('/dashboard-overview');
+        router.push('/items-management');
 
       } else {
         toast.error('Login failed. Please try again.');
